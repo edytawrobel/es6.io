@@ -1,0 +1,89 @@
+var variables can be updated and redefined;
+scope - function scope or globally in a window;
+
+let/const
+rather than being function scoped, it is scoped to the block
+
+const - cannot be updated
+
+1. Replacing the IIFE - (function() {
+    var name = 'edyta'; 
+    console.log(name);
+})();
+
+2. for loops:
+for(var i = 0; i < 10; i++) {
+    console.log(i); 
+    setTimeout(function() { 
+    console.log('The number is ' + i); 
+    }, 1000);
+after 10s i is going to be 10!
+
+change to let
+
+for(let i = 0; i < 10; i++) {
+    console.log(i); 
+    setTimeout(function() { 
+    console.log('The number is ' + i); 
+    }, 1000);
+after 10 s, it will print out:
+The number is 0
+The number is 1
+The number is 2
+The number is 3
+The number is 4
+The number is 5
+The number is 6
+The number is 7
+The number is 8
+The number is 9
+
+Temporal dead zone:
+console.log(pizza);
+const pizza = "Awesome crust";
+
+when you try to access the const before it's been assigned, you'll get an error
+but if use var instead, no error happens, only you get undefined; you can access the variable even if its value's not been assigned yet
+
+var for generic, global scope
+let in blocks
+const - refactor your lets into consts after you completed your task
+
+ARROW FUNCTIONS - THEY ARE ALWAYS ANONYMOUS:
+const names = ['wes', 'kait', 'lux'];
+const fullNames = names.map(function(name) {
+    return `${name} bos`;
+});
+
+const fullNames2 = names.map((name) => { 
+    return `${name} wos`; 
+});
+
+//fat arrow; if you have only one parameter than you don't need the parantheses around name
+
+const fullNames3 = names.map(name => {
+    return `${name} oos`;
+});
+
+IMPLICIT RETURN: (get rid of curly braces
+const fullNames4 = names.map(name => `${name} woos`);
+
+you could turn them into named funtions:
+const sayMyName = (name) => { alert(`Hello ${name}!`) }
+sayMyName('edyta');
+
+this does not get rebound!!
+
+When you do not want the arrow function?
+- when you need argument objects;
+- when you really need 'this' <= when you do not want it to have a scope of Window
+- when you need a method to bind to an object:
+      const person = {
+        points: 23;
+        score: () => { this.points++ }
+      }
+      const person = {
+        points: 23;
+        score() { this.points++ }
+      }
+- when you need to add a prototype method;
